@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="Filmes">
+<head>
+	<meta charset="UTF-8">
+	<title>Filmes que já assisti</title>
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="js/filmes.module.js"></script>
+	<script src="js/filmes.controller.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="FilmesController">
+		<h1>{{ titulo }}</h1>
+		
+		<div class="lista-filmes">
+			<div class="filme com-cartaz" ng-repeat="filme in filmes">
+				<h1>{{ filme.titulo }}</h1>
+				<button class="del" title="Excluir" ng-click="removerFilme(filme.id)"></button>
+				<img ng-src="{{ filme.cartaz }}" alt="Cartaz de {{ filme.titulo }}">
+				<ul>
+					<li><strong>Ano:</strong> {{ filme.ano }}</li>
+					<li><strong>Produtora:</strong> {{ filme.produtora }}</li>
+				</ul>
+				<p>{{ filme.sinopse }}</p>
+			</div>	
+		</div>
+
+		<hr>
+
+		<form class="form-filmes" ng-submit="adicionarFilme()">
+			<h1>Adicionar Filme</h1>
+			<div class="form-campo">
+				<label for="titulo">Título</label>
+				<input type="text" id="titulo" ng-model="novoFilme.titulo">
+			</div>
+			<div class="form-campo pequeno">
+				<label for="ano">Ano de Lançamento</label>
+				<input type="number" id="ano" ng-model="novoFilme.ano">
+			</div>
+			<div class="form-campo medio">
+				<label for="produtora">Produtora</label>
+				<input type="text" id="produtora" ng-model="novoFilme.produtora">
+			</div>
+			<div class="form-campo">
+				<label for="cartaz">Url do Cartaz</label>
+				<input type="text" id="cartaz" ng-model="novoFilme.cartaz">
+			</div>
+			<div class="form-campo">
+				<label for="sinopse">Sinópse</label>
+				<textarea id="sinopse" rows="5" ng-model="novoFilme.sinopse"></textarea>
+			</div>
+
+			<footer>
+				<button type="reset">Limpar</button>
+				<button type="submit">Salvar</button>
+			</footer>
+		</form>
+	</div>
+	
+</body>
+</html>
